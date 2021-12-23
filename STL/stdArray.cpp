@@ -1,7 +1,4 @@
-#include <iostream>
-#include <array>
-
-#define LOG(x) std::cout << x << std::endl;
+#include "common.h"
 
 int main()
 {
