@@ -6,8 +6,8 @@
 int main()
 {
     std::array<int, 5> arr;
-
-    arr = {2,3,5,6,9};
+    arr.fill(10);
+//    arr = {2,3,5,6,9};
 
     for(int& val: arr)
         LOG(val);
