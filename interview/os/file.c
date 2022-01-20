@@ -4,8 +4,9 @@
 int main()
 {
     int number = 0;
+    int num = 0;
     FILE *fptr;
-    fptr = fopen("text.txt","w");
+    fptr = fopen("text.txt","r");
     if(!fptr)
     {
         printf("ERROR creating file1.txt");
@@ -14,8 +15,9 @@ int main()
     printf("Enter the number :\t");
     scanf("%d",&number);
 
-    fprintf(fptr, "%d\n",number);
-
+//    fprintf(fptr, "%d\n",number);
+    fscanf(fptr, "%d", &num);
+    printf("Number = %d\n",num);
     fclose(fptr);
-    return 0;
+    exit(1);
 }
