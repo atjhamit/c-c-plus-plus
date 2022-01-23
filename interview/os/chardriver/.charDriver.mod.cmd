@@ -1,1 +1,0 @@
-cmd_/home/minikube/github/learning/interview/os/chardriver/charDriver.mod := { echo  /home/minikube/github/learning/interview/os/chardriver/charDriver.o;  echo; } > /home/minikube/github/learning/interview/os/chardriver/charDriver.mod
