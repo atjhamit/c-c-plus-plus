@@ -15,8 +15,8 @@ enum Type
 
 class Tree
 {
-public:
     Node* root;
+public:
     Tree() : root(0) {    }
 
     Node* createNode(int data)
@@ -221,12 +221,76 @@ public:
         LOG("");
     }
 
+    int count(Node* head)
+    {
+        if(!head) return 0;
+
+        int x = count(head->left);
+        int y = count(head->right);
+        return x + y + 1;
+    }
+
+    int count()
+    {
+        return count(root);
+    }
+
+    int sumOfNodes(Node* head)
+    {
+        if(!head) return 0;
+
+        int x = sumOfNodes(head->left);
+        int y = sumOfNodes(head->right);
+        return x + y + head->data;
+    }
+
+    int sumOfNodes()
+    {
+        return sumOfNodes(root);
+    }
+
+    int height(Node* head)
+    {
+        if(!head) return -1;
+
+        int x = height(head->left);
+        int y = height(head->right);
+
+        if(x > y) 
+            return x + 1;
+        else
+            return y + 1;
+    }
+
+    int height()
+    {
+        return height(root);
+    }
+
+    int countLeaves(Node* head)
+    {
+        if(!head) return 0;
+
+        int x = countLeaves(head->left);
+        int y = countLeaves(head->right);
+        if(!(x + y))
+            return x + y + 1;
+        else
+            return x + y;
+    }
+
+    int countLeaves()
+    {
+        return countLeaves(root);
+    }
+
 };
 
 int main()
 {
     Tree tree;
     tree.create();
+/*
     LOG("inorder");
     tree.inorder(iterative);
     tree.inorder(recursive);
@@ -241,5 +305,12 @@ int main()
 
     LOG("levelorder");
     tree.levelorder();
+*/
+
+    LOG("number of nodes : " << tree.count());
+    LOG("sum of nodes : " << tree.sumOfNodes());
+    LOG("height of nodes : " << tree.height());
+    LOG("leaves : " << tree.countLeaves());
+
     return 0;
 }
