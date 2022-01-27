@@ -45,6 +45,7 @@ public:
 	
 	Node* llRotation(Node* head)
 	{
+		LOG(__FUNCTION__);
 		Node* headl = head->left;
 		Node* headlr = headl->right;
 		
@@ -62,11 +63,25 @@ public:
 	
 	Node* rrRotation(Node* head)
 	{
-		return 0;
+		LOG(__FUNCTION__);
+		Node* headr = head->right;
+		Node* headrl = headr->left;
+		
+		headr->left = head;
+		head->right = headrl;
+		
+		head->height = height(head);
+		headr->height = height(headr);
+		
+		if(head == root)
+			root = headr;
+		
+		return headr;
 	}
 	
 	Node* lrRotation(Node* head)
 	{
+		LOG(__FUNCTION__);
 		Node* headl = head->left;
 		Node* headlr = headl->right;
 		
@@ -87,7 +102,23 @@ public:
 	
 	Node* rlRotation(Node* head)
 	{
-		return 0;
+		LOG(__FUNCTION__);
+		Node* headr = head->right;
+		Node* headrl = headr->left;
+		
+		head->right = headrl->left;
+		headr->left = headrl->right;
+		headrl->left = head;
+		headrl->right = headr;
+		
+		head->height = height(head);
+		headr->height = height(headr);
+		headrl->height = height(headrl);
+		
+		if(head == root)
+			root = headrl;
+		
+		return headrl;
 	}	
 	
 	Node* rinsert(Node* head, int data)
@@ -110,11 +141,11 @@ public:
 		// rotations
 		if((balancefactor(head) == 2) && (balancefactor(head->left) == 1))
 			return llRotation(head);
-		else if((balancefactor(head) == -2) && (balancefactor(head->left) == -1))
+		else if((balancefactor(head) == -2) && (balancefactor(head->right) == -1))
 			return rrRotation(head);
 		else if((balancefactor(head) == 2) && (balancefactor(head->left) == -1))
 			return lrRotation(head);
-		else if((balancefactor(head) == -2) && (balancefactor(head->left) == 1))
+		else if((balancefactor(head) == -2) && (balancefactor(head->right) == 1))
 			return rlRotation(head);
 		
 		return head;
@@ -131,8 +162,9 @@ public:
 	void inorder(Node* head)
 	{
 		if(!head) return;
+		
 		inorder(head->left);
-		LOG("data : " << head->data << "\theight : " << head->height);
+		LOG("data : " << head->data << "\tbalance factor : " << balancefactor(head));
 		inorder(head->right);
 	}
 	
@@ -145,7 +177,7 @@ public:
 int main()
 {
 	AVL obj;
-	std::vector<int> vec = {50,10,20};
+	std::vector<int> vec = {10,20,30,25,28,27,5};
 	obj.create(vec);
 	
 	obj.inorder();
