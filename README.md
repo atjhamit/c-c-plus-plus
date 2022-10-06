@@ -1,4 +1,3 @@
 
 # learning
-leaning and trying random things
-mostly around c++
+leaning and trying random things mostly around c++
